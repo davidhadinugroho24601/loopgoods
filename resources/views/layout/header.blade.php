@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
         <title>Document</title>
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
     <link href="/bs-css/bootstrap.css" rel="stylesheet">
     <script src="/bs-js/bootstrap.bundle.min.js"></script>
 
@@ -20,7 +20,7 @@
         <li class="nav-item"><a href="#" class="nav-link">Categories</a></li>
         <li class="nav-item" ><a href="#" class="nav-link">Contact</a></li>
         <li class="nav-item" ><a href="#" class="nav-link">Contact</a></li>
-        <li class="nav-item " ><a href="#" class="btn btn-primary">login</a> <a href="#" class="btn btn-light">logout</a></li>
+        <li class="nav-item " ><a href="#" class="btn btn-primary">login</a> <a href="#" class="btn btn-light" style="">logout</a></li>
         
         <!-- <li class="nav-item"><a href="#" class="nav-link">About</a></li> -->
       </ul>
