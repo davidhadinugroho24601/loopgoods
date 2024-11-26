@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
-    return view('home');
+    return view('user/home');
 });
 
 
