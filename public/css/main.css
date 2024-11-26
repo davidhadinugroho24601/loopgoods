@@ -1,0 +1,26 @@
+:root {
+    --primary-color: #4EB57C;
+}
+
+.btn{
+    border-radius: 50px !important;
+}
+.btn-primary{
+    border: 1px solid !important;
+    border-color: var(--primary-color) !important;
+}
+
+header .btn-light{
+    border: 1px solid;
+    border-color: var(--primary-color);
+    color: var(--primary-color) !important;
+}
+
+.body{
+    background-color: var(--primary-color);
+}
+
+.body .container{
+    border-radius: 25px;
+    /* background-color: white; */
+}
