@@ -25,7 +25,8 @@ class UserController extends Controller
         // Handle file upload
         if ($request->hasFile('image')) {
             // Store the uploaded file and get its path
-            $path = $request->file('image')->store('images', 'public');
+        $path = $request->file('image')->store('images', 'public');
+       
         }
 
         // Perform other logic like saving data to the database

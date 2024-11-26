@@ -15,6 +15,6 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::get('{userid}/upload', [UserController::class, 'index']);
-    Route::get('{userid}/store', [UserController::class, 'store']);
+    Route::post('{userid}/store', [UserController::class, 'store']);
 });
 

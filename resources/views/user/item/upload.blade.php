@@ -1,7 +1,7 @@
 @include('user.layout.header')
 <div class="body" >
 <div class="container">
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="/user/1/store" method="POST" enctype="multipart/form-data">
     @csrf
 
     <label for="name">Name:</label>
