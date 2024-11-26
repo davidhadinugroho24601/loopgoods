@@ -1,7 +1,7 @@
-@include('layout.header')
+@include('user.layout.header')
 <div class="body" >
 <div class="container">
 tes
 </div>
 </div>
-@include('layout.footer')
+@include('user.layout.footer')
