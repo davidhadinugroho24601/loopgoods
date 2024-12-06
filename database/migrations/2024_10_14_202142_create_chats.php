@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chats', function (Blueprint $table) {
-            $table->id('chat_id');
-            $table->unsignedBigInteger('user_id');
+            $table->id();
+        $table->unsignedBigInteger('sender_id'); // Foreign key to the user who sends the message
+        $table->unsignedBigInteger('receiver_id'); // Foreign key to the user who receives the message
+        $table->text('message'); // The chat message
+        $table->timestamps();
 
-            $table->timestamps();
-            
-            $table->foreign('user_id')
-             ->references('id')
-             ->on('users')
-             ->onDelete('cascade');
+        // Add foreign key constraints (assuming users table exists)
+        $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+        $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
