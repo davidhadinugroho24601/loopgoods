@@ -11,19 +11,27 @@
 
 </head>
 <body>
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-      
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a style="color:#005293" href="#" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Categories</a></li>
-        <li class="nav-item" ><a href="#" class="nav-link">Contact</a></li>
-        <li class="nav-item" ><a href="#" class="nav-link">Contact</a></li>
-        <li class="nav-item " ><a href="#" class="btn btn-primary">login</a> <a href="#" class="btn btn-light" style="">logout</a></li>
-        
-        <!-- <li class="nav-item"><a href="#" class="nav-link">About</a></li> -->
-      </ul>
-    </header>
+<header class="navbar">
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <img src="path/to/your/logo.png" alt="Logo" class="logo-img">
+        </div>
 
-  </div>
+        <!-- Navigation Links -->
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="{{ route('about')}}">About Us</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Login & Sign Up Buttons -->
+        <div class="auth-buttons">
+            <a href="{{ route('login') }}" class="login-btn">Login</a>
+            <a href="{{ route('register') }}" class="signup-btn">Sign Up</a>
+        </div>
+    </div>
+</header>
