@@ -12,27 +12,26 @@
         >
 
         <!-- Item Name -->
-        <h1 class="text-2xl font-semibold mb-4">{{ $item->name }}</h1>
+        <h1 class="text-3xl font-bold mb-4 text-[#4EB57C]">{{ $item->name }}</h1>
 
         <!-- Availability -->
-        <p class="text-lg font-bold text-[#FF2D20] mb-4"> {{ $item->location }}</p>
+        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ $item->location }}</p>
 
         <!-- Description -->
-        <p class="text-gray-700 mb-4">
+        <p class="text-gray-700 mb-6">
             <span class="font-semibold">Description:</span> {{ $item->description }}
         </p>
 
-       
-
         <!-- Map Container -->
-        <div id="map" class="w-full h-64 rounded-md mb-4"></div>
+        <div id="map" class="w-full h-64 rounded-md mb-6 shadow-md"></div>
 
         <!-- Contact Button -->
-        <a href="{{ route('chat.index', $item->user_id) }}" class="mt-4 inline-block px-4 py-2 bg-[#FF2D20] text-white rounded-full">Contact</a>
+        <a href="{{ route('chat.index', $item->user_id) }}" 
+           class="mt-4 inline-block px-6 py-3 bg-[#4EB57C] text-white rounded-lg hover:bg-[#357a5c] transition">
+           Contact Seller
+        </a>
     </div>
 </div>
-
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -85,4 +85,25 @@ class UserController extends Controller
 
         return view('dashboard', compact('items', 'chats'));
     }
+
+    public function edit($item_id)
+{
+    $item = Item::findOrFail($item_id);
+    return view('user.item.edit', compact('item')); // Pass the item to the edit view
+}
+
+public function update(Request $request, $item_id)
+{
+    $item = Item::findOrFail($item_id);
+    $item->update($request->all()); // Update item with validated data
+    return redirect()->route('dashboard'); // Redirect back to the dashboard
+}
+
+public function destroy($item_id)
+{
+    $item = Item::findOrFail($item_id);
+    $item->delete(); // Delete item
+    return redirect()->route('dashboard'); // Redirect back to the dashboard
+}
+
 }

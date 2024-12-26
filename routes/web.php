@@ -30,10 +30,13 @@ Route::middleware('auth')->group(function () {
 Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('upload', [UserController::class, 'index'])->name('item.upload');
     Route::post('store', [UserController::class, 'store'])->name('item.store');
-    Route::get('edit', [UserController::class, 'edit'])->name('item.edit');
-    Route::post('update', [UserController::class, 'update'])->name('item.update');
+    Route::get('/items/{item_id}/edit', [UserController::class, 'edit'])->name('item.edit');
+    Route::put('/items/{item_id}', [UserController::class, 'update'])->name('item.update');
+    Route::delete('/items/{item_id}', [UserController::class, 'destroy'])->name('item.destroy');
+
     Route::get('items/{id}', [DisplayController::class, 'show'])->name('item.show');
 });
+
 
 
 
