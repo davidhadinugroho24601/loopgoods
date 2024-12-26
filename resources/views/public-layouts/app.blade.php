@@ -16,22 +16,22 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 <body class="font-sans antialiased dark:bg-[#EAF8EF] ">
-        
-        
 
     <!-- Include the header partial from the public-layouts folder -->
     @include('public-layouts.header')
 
     <!-- Main Content Section -->
-    <div class="bg-gray-50 text-black/50 dark:bg-[#EAF8EF] ">
-        @yield('content')
+    <div class="bg-gray-50 text-black/50 dark:bg-[#EAF8EF]">
+        <div class="container mx-auto px-4 py-6">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Include the footer partial from the public-layouts folder -->
     @include('public-layouts.footer')
+
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-
 
 </body>
 </html>
