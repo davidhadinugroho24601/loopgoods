@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ItemResource\Pages;
 use App\Filament\Admin\Resources\ItemResource\RelationManagers;
+use App\Filament\Admin\Resources\ItemResource\RelationManagers\GalleryRelationManager;
 use App\Models\Item;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -80,7 +81,7 @@ class ItemResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            GalleryRelationManager::class,
         ];
     }
 
