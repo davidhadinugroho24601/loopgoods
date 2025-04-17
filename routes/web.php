@@ -44,3 +44,7 @@ Route::prefix('user')->middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
+
+use Filament\Facades\Filament;
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {});
