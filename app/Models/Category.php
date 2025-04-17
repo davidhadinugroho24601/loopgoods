@@ -9,9 +9,11 @@ use App\Models\Subcategory;
 class Category extends Model
 {
     use HasFactory;
-
-    public function subcategories()
-    {
-        return $this->hasMany(Subcategory::class, 'category_id');
-    }
+    protected $primaryKey = 'category_id';
+    protected $fillable = [
+        'name',
+        'description',
+        
+    ];
+    
 }

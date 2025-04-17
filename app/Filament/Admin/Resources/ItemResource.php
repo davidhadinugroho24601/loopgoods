@@ -34,19 +34,15 @@ class ItemResource extends Resource
                 Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
-                Select::make('subcategory_id')
-                    ->relationship('subcategory', 'name')
-                    ->label('Subcategory')
-                    ->required(),
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Owner')
                     ->required(),
-                Select::make('status')
-                    ->options([
-                        'available' => 'Available',
-                        'taken' => 'Taken',
-                    ])->required(),
+                // Select::make('status')
+                //     ->options([
+                //         'available' => 'Available',
+                //         'taken' => 'Taken',
+                //     ])->required(),
             ]);
     }
 
@@ -56,12 +52,12 @@ class ItemResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('category.name')->label('Category'),
-                TextColumn::make('user.name')->label('Owner'),
-                BadgeColumn::make('status')
-                    ->colors([
-                        'success' => 'available',
-                        'danger' => 'taken',
-                    ]),
+                // TextColumn::make('user.name')->label('Owner'),
+                // BadgeColumn::make('status')
+                //     ->colors([
+                //         'success' => 'available',
+                //         'danger' => 'taken',
+                //     ]),
                 TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
