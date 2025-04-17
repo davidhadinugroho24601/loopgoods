@@ -48,39 +48,48 @@
         </div>
 
 
-        <button type="submit" style="background-color: #FF2D20" class="w-full mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Upload</button>
+        <button type="submit" style="background-color: #4EB57C" class="w-full mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Upload</button>
     </form>
 </div>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<!-- Leaflet Control Geocoder CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+<!-- Leaflet Control Geocoder JS -->
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
 <script>
     // Initialize the Leaflet map
-    var map = L.map('map').setView([51.505, -0.09], 13); // Default to some coordinates
+    var map = L.map('map').setView([51.505, -0.09], 13); // Default location
 
     // Add OpenStreetMap tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Add a marker to show location if the user clicks on the map
+    // Add a marker to show the user's selected location
     var marker;
-    map.on('click', function (e) {
-        var lat = e.latlng.lat;
-        var lon = e.latlng.lng;
-
+    function updateMarker(lat, lon) {
         // Remove previous marker
         if (marker) {
             map.removeLayer(marker);
         }
-
         // Add new marker
         marker = L.marker([lat, lon]).addTo(map);
-
-        // Set the value of the location input field
+        // Update the hidden input field
         document.getElementById('location').value = lat + ',' + lon;
+    }
+
+    // Listen for map clicks to set the marker
+    map.on('click', function (e) {
+        updateMarker(e.latlng.lat, e.latlng.lng);
     });
 
     // Add Geocoder Search
-    L.Control.geocoder({
+    var geocoder = L.Control.geocoder({
         defaultMarkGeocode: false
     })
         .on('markgeocode', function (e) {
@@ -90,16 +99,8 @@
             // Move the map to the geocoded location
             map.setView([lat, lon], 13);
 
-            // Remove previous marker
-            if (marker) {
-                map.removeLayer(marker);
-            }
-
-            // Add new marker
-            marker = L.marker([lat, lon]).addTo(map);
-
-            // Set the value of the location input field
-            document.getElementById('location').value = lat + ',' + lon;
+            // Update the marker on the map
+            updateMarker(lat, lon);
         })
         .addTo(map);
 </script>
