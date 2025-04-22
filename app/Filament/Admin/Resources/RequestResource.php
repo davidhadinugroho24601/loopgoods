@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\Action;
+use App\Services\ItemService;
+use Filament\Tables\Columns\IconColumn;
 
 class RequestResource extends Resource
 {
@@ -51,29 +53,46 @@ class RequestResource extends Resource
             ->columns([
                 TextColumn::make('sender.name'),
                 TextColumn::make('item.name'),
+
+                IconColumn::make('status')
+                    ->label('Status')
+                    ->icon(fn ($record) => match ($record->status) {
+                        'accepted' => 'heroicon-o-check-circle',
+                        'declined' => 'heroicon-o-x-circle',
+                        default => 'heroicon-o-paper-airplane',
+                    })
+                    ->color(fn ($record) => match ($record->status) {
+                        'accepted' => 'success',
+                        'declined' => 'danger',
+                        default => 'primary',
+                    })
+                    ->tooltip(fn ($record) => ucfirst($record->status)),
+                
             ])
             ->filters([
                 //
             ])
             ->actions([
-            Action::make('accept')
+                Action::make('accept')
                 ->label('Accept')
                 ->color('success')
                 ->requiresConfirmation()
                 ->icon('heroicon-o-check')
-                ->action(function ($record) {
-                    $record->update(['status' => 'accepted']);
-                    dd($record);
-                }),
-    
+                ->action(function ($record, ItemService $itemService) {
+                    $itemService->acceptRequest($record, 'accepted');
+                })
+                ->hidden(fn ($record) => in_array($record->status, ['accepted', 'declined'])),
+            
             Action::make('decline')
                 ->label('Decline')
                 ->color('danger')
                 ->requiresConfirmation()
                 ->icon('heroicon-o-x-mark')
-                ->action(function ($record) {
-                    $record->update(['status' => 'declined']);
-                }),
+                ->action(function ($record, ItemService $itemService) {
+                    $itemService->declineRequest($record, 'declined');
+                })
+                ->hidden(fn ($record) => in_array($record->status, ['accepted', 'declined'])),
+            
     
             ])
             ->bulkActions([
