@@ -31,20 +31,33 @@ class RequestResource extends Resource
     {
         return $form
             ->schema([
-            Select::make('sender_id')
+            
+                Select::make('sender_id')
                 ->label('Sender')
                 ->relationship('sender', 'name')
                 ->searchable()
                 ->preload()
-                ->required(),
+                ->required()
+                ->disabled(),
     
-            Select::make('item_id')
+            
+                Select::make('item_id')
                 ->label('Item')
                 ->relationship('item', 'name')
                 ->searchable()
                 ->preload()
-                ->required(),
+                ->required()
+                ->disabled(),
+            
+                TextInput::make('quantity')
+                ->type('number')
+                ->label('Quantity')
+                ->minValue(0)
+                ->required()
+                ->disabled(),
             ]);
+
+           
     }
 
     public static function table(Table $table): Table
@@ -53,6 +66,7 @@ class RequestResource extends Resource
             ->columns([
                 TextColumn::make('sender.name'),
                 TextColumn::make('item.name'),
+                TextColumn::make('quantity'),
 
                 IconColumn::make('status')
                     ->label('Status')

@@ -11,6 +11,7 @@ class Request extends Model
         'recipient_id',
         'item_id',
         'status',
+        'quantity',
 
     ];
 

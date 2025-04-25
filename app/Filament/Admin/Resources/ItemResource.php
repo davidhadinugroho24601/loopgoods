@@ -19,6 +19,10 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\ViewField;
+use App\Forms\Components\LeafletMap;
+use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Hidden;
 
 class ItemResource extends Resource
 {
@@ -31,19 +35,54 @@ class ItemResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')->required(),
+                
                 Textarea::make('description'),
+                
                 Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
+                
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Owner')
                     ->required(),
-                // Select::make('status')
-                //     ->options([
-                //         'available' => 'Available',
-                //         'taken' => 'Taken',
-                //     ])->required(),
+                
+                TextInput::make('quantity')
+                    ->type('number')
+                    ->label('Quantity')
+                    ->minValue(0)
+                    ->required(),
+        
+                TextInput::make('stock')
+                    ->type('number')
+                    ->label('Stock')
+                    ->minValue(0)
+                    ->visible(fn (string $context) => $context === 'edit')->disabled(),
+                
+
+                    // LeafletMap::make('location')
+                    // ->label('Location')
+                    // ->columnSpanFull()
+                    // ->extraAttributes(['class' => '!border-none !shadow-none !border-t-0'])
+                    // ->required(), // Or any other rules,
+      
+                    
+
+
+
+                    // ViewField::make('map')
+                    // ->label('Map')
+                    // ->dehydrated(false)
+                    // ->view(function (\Filament\Forms\Get $get) {
+                    //     return view('components.leaflet-map', [
+                    //         'lat' => $get('latitude') ?? -2.5489,
+                    //         'lng' => $get('longitude') ?? 118.0149,
+                    //     ]);
+                    // }),
+                
+                    
+
+                    
             ]);
     }
 
@@ -53,6 +92,8 @@ class ItemResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('category.name')->label('Category'),
+                TextColumn::make('quantity')->label('Quantity'),
+                TextColumn::make('stock')->label('Available Stock'),
                 // TextColumn::make('user.name')->label('Owner'),
                 // BadgeColumn::make('status')
                 //     ->colors([

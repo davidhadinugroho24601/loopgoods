@@ -19,8 +19,12 @@ class Item extends Model
         'longitude',
         'location',
         'image_path', 
+        'quantity', 
+        'stock', 
     ];
-    
+    // protected $casts = [
+    //     'location' => 'array', // Makes sure the location is stored as an array
+    // ];
     // Relasi ke Category
     public function category()
     {

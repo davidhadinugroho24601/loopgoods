@@ -29,14 +29,14 @@
             <ul class="mt-4 h-48 overflow-y-auto">
                 @foreach ($items as $item)
                     <li class="mb-3 flex items-center justify-between">
-                        <a href="{{ route('item.show', $item->item_id) }}" class="text-blue-500">{{ $item->name }}</a>
+                        <a href="{{ route('item.show', $item->id) }}" class="text-blue-500">{{ $item->name }}</a>
                         <div>
                             <!-- Edit Button -->
-                            <a href="{{ route('item.edit', $item->item_id) }}" 
+                            <a href="{{ route('item.edit', $item->id) }}" 
                                class="text-center inline-block px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Edit</a>
 
                             <!-- Delete Form -->
-                            <form action="{{ route('item.destroy', $item->item_id) }}" method="POST" class="inline">
+                            <form action="{{ route('item.destroy', $item->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 

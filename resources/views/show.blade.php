@@ -15,7 +15,7 @@
         <h1 class="text-3xl font-bold mb-4 text-[#4EB57C]">{{ $item->name }}</h1>
 
         <!-- Availability -->
-        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ $item->location }}</p>
+        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ '$item->location' }}</p>
 
         <!-- Description -->
         <p class="text-gray-700 mb-6">
@@ -46,7 +46,7 @@
         // Add a marker to the map
         L.marker([{{ $item->latitude }}, {{ $item->longitude }}])
             .addTo(map)
-            .bindPopup("<strong>{{ $item->name }}</strong><br>{{ $item->location }}")
+            .bindPopup("<strong>{{ $item->name }}</strong><br>{{ '$item->location' }}")
             .openPopup();
     });
 </script>

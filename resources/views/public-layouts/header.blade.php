@@ -18,6 +18,7 @@
         <nav class="hidden md:flex">
             <ul class="flex items-center gap-6">
                 <li><a href="/" class="text-[#4EB57C] hover:text-[#357a5c] transition">Home</a></li>
+                <li><a href="{{ route('categories') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Category</a></li>
                 <li><a href="{{ route('about') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">About Us</a></li>
                 <li><a href="{{ route('contact') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Contact</a></li>
 
@@ -49,6 +50,7 @@
     <nav class="hidden md:hidden mt-4" id="mobile-menu">
         <ul class="flex flex-col items-start gap-4">
             <li><a href="/" class="text-[#4EB57C] hover:text-[#357a5c] transition">Home</a></li>
+            <li><a href="{{ route('categories') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Category</a></li>
             <li><a href="{{ route('about') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">About Us</a></li>
             <li><a href="{{ route('contact') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Contact</a></li>
 

@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [DisplayController::class, 'index'])->name('home');
 
+Route::get('/categories', [DisplayController::class, 'categories'])->name('categories');
+Route::get('/categories/show', [DisplayController::class, 'categories'])->name('category.show');
+
 Route::get('/dashboard',  [UserController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/about-us', function () {

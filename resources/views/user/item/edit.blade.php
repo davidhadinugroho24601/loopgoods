@@ -16,7 +16,7 @@
     @endif
 
     <!-- Form starts here -->
-    <form action="{{ route('item.update', $item->item_id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('item.update', $item->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
