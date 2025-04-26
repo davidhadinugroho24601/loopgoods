@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use App\Http\Middleware\RedirectToChatIndex;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -26,8 +27,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->colors([
-                'primary' => Color::Amber,
-            ]) 
+                'primary' => '#4EB57C',   // your green
+                'danger' => '#E53935',    // softer red for errors
+                'info' => '#29B6F6',      // light blue
+                'success' => '#66BB6A',   // greenish success (close to your primary but still distinguishable)
+                'warning' => '#FFA726',   // orange for warnings
+            ])
+            ->brandName('LOOPGOODS')
             ->profile()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
@@ -49,6 +55,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                RedirectToChatIndex::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

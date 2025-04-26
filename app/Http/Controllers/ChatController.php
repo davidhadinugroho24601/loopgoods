@@ -55,7 +55,7 @@ class ChatController extends Controller
             ->where('id', '!=', Auth::id()) // Exclude the current user
             ->first(); // Get only the first valid user
     });
-
+ 
     // Filter out null values
     $chatUsers = $chatUsers->filter(function($user) {
         return $user !== null;

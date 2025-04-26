@@ -9,11 +9,12 @@ class DisplayController extends Controller
 {
     public function index()
     {
-        // Fetch all items from the database
+        // Fetch all categories and items
+        $categories = Category::all();
         $items = Item::all();
-
-        // Return the view and pass the items
-        return view('welcome', compact('items'));
+           
+               // Return the view with both datasets
+        return view('welcome', compact('items', 'categories'));
     }
 
 
@@ -30,15 +31,18 @@ class DisplayController extends Controller
     }
     
 
-    public function categoriesShow($categoryId)
+    public function categoryShow($categoryId)
     {
-        // Fetch all categories and items
-        $categories = Category::find();
-        $items = Item::find('category_id', $categoryId);
+        // Fetch all categories
+        $categories = Category::all();
+    
+        // Fetch items that belong to the given category
+        $items = Item::where('category_id', $categoryId)->get();
     
         // Return the view with both datasets
         return view('categories', compact('items', 'categories'));
     }
+    
 
     public function show($id)
     {

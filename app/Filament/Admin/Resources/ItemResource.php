@@ -23,7 +23,9 @@ use Filament\Forms\Components\ViewField;
 use App\Forms\Components\LeafletMap;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Hidden;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Blade;
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
@@ -115,6 +117,17 @@ class ItemResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('Export')
+                    ->icon('heroicon-m-arrow-down-tray')
+                    ->openUrlInNewTab()
+                    ->deselectRecordsAfterCompletion()
+                    ->action(function (Collection $records) {
+                        return response()->streamDownload(function () use ($records) {
+                            echo Pdf::loadHTML(
+                                Blade::render('filament.forms.pdf', ['records' => $records])
+                            )->stream();
+                        }, 'items.pdf');
+                    }),
                 ]),
             ]);
     }
@@ -124,6 +137,17 @@ class ItemResource extends Resource
         return [
             GalleryRelationManager::class,
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+    
+        if (auth()->user()?->role !== 'admin') {
+            $query->where('user_id', auth()->id());
+        }
+    
+        return $query;
     }
 
     public static function getPages(): array

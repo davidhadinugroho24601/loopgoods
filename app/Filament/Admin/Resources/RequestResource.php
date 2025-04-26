@@ -65,6 +65,7 @@ class RequestResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('sender.name'),
+                TextColumn::make('recipient.name'),
                 TextColumn::make('item.name'),
                 TextColumn::make('quantity'),
 
@@ -123,6 +124,17 @@ class RequestResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+    
+        if (auth()->user()?->role !== 'admin') {
+            $query->where('recipient_id', auth()->id());
+        }
+    
+        return $query;
+    }
+    
     public static function getPages(): array
     {
         return [

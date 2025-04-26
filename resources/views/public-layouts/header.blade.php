@@ -24,7 +24,9 @@
 
                 @if (Auth::check())
                     <!-- Logged-in Links -->
-                    <li><a href="{{ route('dashboard') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Dashboard</a></li>
+                    <!-- <li><a href="{{ route('dashboard') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Dashboard</a></li> -->
+                    <li><a href="/admin" class="text-[#4EB57C] hover:text-[#357a5c] transition">Dashboard</a></li>
+
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-[#4EB57C] hover:text-[#357a5c] transition">
                             Logout
@@ -56,7 +58,7 @@
 
             @if (Auth::check())
                 <!-- Logged-in Links -->
-                <li><a href="{{ route('dashboard') }}" class="text-[#4EB57C] hover:text-[#357a5c] transition">Dashboard</a></li>
+                <li><a href="/admin" class="text-[#4EB57C] hover:text-[#357a5c] transition">Dashboard</a></li>
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-[#4EB57C] hover:text-[#357a5c] transition">
                         Logout
