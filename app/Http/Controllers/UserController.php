@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Chat;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Request as ItemRequest;
 
 class UserController extends Controller
 {
@@ -66,6 +67,28 @@ class UserController extends Controller
         return redirect()->route('home')->with('success', 'Item uploaded successfully!');
     }
     
+
+
+    public function requestStore(Request $request)
+    {
+        $request->validate([
+            'sender_id' => 'required|exists:users,id',
+            'recipient_id' => 'required|exists:users,id',
+            'item_id' => 'required|exists:items,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        // Create a new request
+        $requestModel = new ItemRequest();
+        $requestModel->sender_id = $request->sender_id;
+        $requestModel->recipient_id = $request->recipient_id;
+        $requestModel->item_id = $request->item_id;
+        $requestModel->quantity = $request->quantity;
+        $requestModel->status = 'sent'; // Default status (optional, adjust if you want)
+        $requestModel->save();
+
+        return redirect()->back()->with('success', 'Request submitted successfully!');
+    }
 
 
     public function dashboard()

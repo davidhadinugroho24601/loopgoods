@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto py-10">
     <!-- Item Detail Card -->
-    <div class="bg-white text-black p-6 rounded-lg shadow-lg hover:scale-105 transform transition max-w-2xl mx-auto">
+    <div class="bg-white text-black p-6 rounded-lg shadow-lg  transform transition max-w-2xl mx-auto">
     <div class="relative w-full h-64 overflow-hidden rounded-md mb-4" x-data="{ current: 0 }">
     <div class="flex transition-all duration-500" :style="'transform: translateX(-' + (current * 100) + '%)'">
         @foreach ($item->gallery as $gallery)
@@ -47,11 +47,62 @@
         <!-- Map Container -->
         <div id="map" class="w-full h-64 rounded-md mb-6 shadow-md"></div>
 
-        <!-- Contact Button -->
         <a href="{{ route('chat.index', $item->user_id) }}" 
-           class="mt-4 inline-block px-6 py-3 bg-[#4EB57C] text-white rounded-lg hover:bg-[#357a5c] transition">
-           Contact Seller
+            class="mt-4 inline-block px-6 py-3 bg-[#4EB57C] text-white rounded-lg hover:bg-[#3A9E6F] transition">
+            Contact Owner
         </a>
+        @php
+            // Check if a request already exists
+            $existingRequest = \App\Models\Request::where('sender_id', auth()->id())
+                                ->where('item_id', $item->id)
+                                ->first();
+        @endphp
+
+<div class="mt-4">
+    @if ($existingRequest)
+        <!-- Show existing request info -->
+        <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow">
+            <p><strong>Request Submitted!</strong></p>
+            <p>Quantity: {{ $existingRequest->quantity }}</p>
+            <p>Status: {{ ucfirst($existingRequest->status) }}</p>
+        </div>
+    @else
+        <!-- Show Make a Request Button and Form if no existing request -->
+        <div x-data="{ open: false }">
+            <a href="javascript:void(0)" 
+                @click="open = !open"
+                class="inline-block px-6 py-3 bg-[#29B6F6] text-white rounded-lg hover:bg-[#199fd9] transition">
+                Make a Request
+            </a>
+
+            <div x-show="open" x-transition 
+                 class="mt-4 space-y-4 bg-white p-4 border rounded-lg shadow">
+                <form action="{{ route('request.store') }}" method="POST" class="space-y-4">
+                    @csrf
+
+                    <input type="hidden" name="sender_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="recipient_id" value="{{ $item->user_id }}">
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+
+                    <div>
+                        <label class="block text-gray-700 mb-1">Quantity</label>
+                        <input type="number" name="quantity" min="1" required 
+                               class="w-full border rounded-lg p-2" placeholder="Enter quantity">
+                    </div>
+
+                    <div>
+                        <button type="submit" 
+                                class="w-full px-6 py-2 !bg-[#4EB57C] text-white rounded-lg hover:!bg-[#3A9E6F] transition">
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
+</div>
+
+
     </div>
 </div>
 

@@ -33,7 +33,10 @@ class AdminPanelProvider extends PanelProvider
                 'success' => '#66BB6A',   // greenish success (close to your primary but still distinguishable)
                 'warning' => '#FFA726',   // orange for warnings
             ])
+            // ->brandLogo(asset('images/logo.png'))
             ->brandName('LOOPGOODS')
+            ->homeUrl('/')
+            // ->brandUrl('/')
             ->profile()
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')

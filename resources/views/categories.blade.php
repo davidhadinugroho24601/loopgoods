@@ -36,7 +36,7 @@
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             @foreach ($items as $item)
                 <div class="bg-white text-black p-6 rounded-lg shadow-lg hover:scale-105 transform transition">
-                    <img src="{{ asset('storage/' . str_replace('public/', '', $item->image_path)) }}" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
+                    <img src="{{ asset('storage/' . str_replace('public/', '', $item->gallery->first()?->image))}}" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
                     <h3 class="text-xl font-semibold text-[#4EB57C]">{{ $item->name }}</h3>
                     <p class="text-lg font-bold text-[#4EB57C]">{{ $item->location }}</p>
                     <a href="{{ route('item.show', $item->id) }}" class="mt-4 inline-block px-6 py-2 bg-[#FF2D20] text-white rounded-full">Details</a>
