@@ -24,6 +24,7 @@ class UserController extends Controller
         $this->categories = $categories;
         $this->chats = $chats;
     }
+    
     public function Index() {
         return view('user/item/upload');
     }

@@ -34,6 +34,7 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 Textarea::make('description')->required(),
+                // Textarea::make('description')->required(),
             ]);
     }
 

@@ -22,14 +22,15 @@ Route::get('/about-us', function () {
 Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
+
 Route::get('/chats', [ChatController::class, 'chatList'])->name('chat.list')->middleware('auth');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/chat/{receiverId}', [ChatController::class, 'index'])->name('chat.index');
     Route::post('/chat/{receiverId}', [ChatController::class, 'store'])->name('chat.store');
-
 });
 
 Route::prefix('user')->middleware('auth')->group(function () {

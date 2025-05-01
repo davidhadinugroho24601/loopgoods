@@ -13,7 +13,7 @@ class CreateItem extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['stock'] = $data['quantity'];
-
+ dd($data['location']);
         return $data;
     }
 }

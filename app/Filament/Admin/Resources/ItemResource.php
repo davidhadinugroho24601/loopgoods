@@ -84,6 +84,11 @@ class ItemResource extends Resource
                 
                     
 
+                    // LeafletMap::make('location')
+                    //     ->label('Location')
+                    //     ->required()
+                    //     ->default('51.505,-0.09'),
+                    
                     
             ]);
     }
@@ -105,11 +110,11 @@ class ItemResource extends Resource
                 TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
-                SelectFilter::make('status')
-                    ->options([
-                        'available' => 'Available',
-                        'taken' => 'Taken',
-                    ]),
+                // SelectFilter::make('status')
+                //     ->options([
+                //         'available' => 'Available',
+                //         'taken' => 'Taken',
+                //     ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -39,6 +39,8 @@
         <!-- Availability -->
         <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ $item->location }}</p>
 
+        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Available Stock: {{ $item->stock }}</p>
+
         <!-- Description -->
         <p class="text-gray-700 mb-6">
             <span class="font-semibold">Description:</span> {{ $item->description }}
