@@ -84,11 +84,10 @@ class ChatResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        $latestChatsPerSender = Chat::selectRaw('MAX(id) as id')
-            ->groupBy('sender_id');
+        $chatIds = Chat::all()->pluck('id'); // Get only the IDs
     
         $query = parent::getEloquentQuery()
-            ->whereIn('id', $latestChatsPerSender);
+            ->whereIn('id', $chatIds); // Now it's a flat array of IDs
     
         if (auth()->user()?->role !== 'admin') {
             $query->where(function ($query) {
@@ -99,6 +98,7 @@ class ChatResource extends Resource
     
         return $query;
     }
+    
     
 
 }

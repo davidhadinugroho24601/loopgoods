@@ -10,9 +10,9 @@
     <div class="h-96 overflow-y-auto mb-4 flex flex-col space-y-4">
         @forelse ($chat->messages as $message)
             <div class="p-3 rounded-lg max-w-[75%]
-                {{ $chat->sender_id === Auth::id() ? 'bg-blue-100 ml-auto text-right' : 'bg-gray-100 mr-auto text-left' }}">
+                {{ $message->sender_id === Auth::id() ? 'bg-blue-100 ml-auto text-right' : 'bg-gray-100 mr-auto text-left' }}">
                 <div class="font-semibold text-sm text-gray-800">
-                    {{ $chat->sender_id === Auth::id() ? 'You' : $chat->sender->name }}
+                    {{ $message->sender_id === Auth::id() ? 'You' : $chat->sender->name }}
                 </div>
                 <p class="text-base">{{ $message->message }}</p>
                 <small class="text-xs text-gray-500">

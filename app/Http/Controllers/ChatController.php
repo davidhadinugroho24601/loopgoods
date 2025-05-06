@@ -40,6 +40,7 @@ class ChatController extends Controller
         Message::create([
             'chat_id' => $chat->id,
             'message' => $request->message,
+            'sender_id' => Auth::id(),
         ]);
     
         return redirect()->route('chat.index', ['chatId' => $chatId]);
