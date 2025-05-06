@@ -26,7 +26,7 @@ class RedirectToChatIndex
     if (Route::is('filament.admin.resources.chats.edit')) {
 
         // Redirect to the chat index route with the receiverId parameter
-        return redirect()->route('chat.index', ['senderId' => $chat->sender_id]);
+        return redirect()->route('chat.index', ['receiverId' => $chat->receiver_id]);
     }
 
         
