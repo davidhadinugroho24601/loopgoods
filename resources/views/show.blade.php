@@ -36,6 +36,8 @@
         <!-- Item Name -->
         <h1 class="text-3xl font-bold mb-4 text-[#4EB57C]">{{ $item->name }}</h1>
 
+        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Provider: {{ $item->user->name }}</p>
+
         <!-- Availability -->
         <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ $item->location }}</p>
 
