@@ -43,10 +43,9 @@ class ChatResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('message')
-                    ->label('Message')
-                    ->limit(50)
-                    ->wrap()
+                TextColumn::make('item.name')
+                    ->label('Item')
+                    ->searchable()
                     ->sortable(),
 
                 TextColumn::make('created_at')

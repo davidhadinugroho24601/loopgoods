@@ -29,8 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/chat/{receiverId}', [ChatController::class, 'index'])->name('chat.index');
-    Route::post('/chat/{receiverId}', [ChatController::class, 'store'])->name('chat.store');
+    Route::get('/chat/{chatId}', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/{chatId}', [ChatController::class, 'store'])->name('chat.store');
+    Route::get('/chat/new/{receiverId}/{itemId}', [ChatController::class, 'newChat'])->name('chat.new');
 });
 
 Route::prefix('user')->middleware('auth')->group(function () {

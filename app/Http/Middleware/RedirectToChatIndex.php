@@ -20,14 +20,11 @@ class RedirectToChatIndex
     public function handle(Request $request, Closure $next)
     {
         $chat = Chat::find($request->record);
-        // dd($chat);
-        // Check if the current route matches 'admin.chats.edit'
-        // Check if the current route matches 'admin.chats.edit'
-    if (Route::is('filament.admin.resources.chats.edit')) {
 
-        // Redirect to the chat index route with the receiverId parameter
-        return redirect()->route('chat.index', ['receiverId' => $chat->receiver_id]);
-    }
+        if (Route::is('filament.admin.resources.chats.edit')) {
+            // Redirect to the chat index route with the receiverId parameter
+            return redirect()->route('chat.index', ['chatId' => $chat->id]);
+        }
 
         
 

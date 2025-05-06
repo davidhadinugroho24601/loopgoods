@@ -49,7 +49,7 @@
         <!-- Map Container -->
         <div id="map" class="w-full h-64 rounded-md mb-6 shadow-md"></div>
 
-        <a href="{{ route('chat.index', $item->user_id) }}" 
+        <a href="{{ route('chat.new', ['receiverId' => $item->user_id, 'itemId' => $item->id]) }}" 
             class="mt-4 inline-block px-6 py-3 bg-[#4EB57C] text-white rounded-lg hover:bg-[#3A9E6F] transition">
             Contact Owner
         </a>
