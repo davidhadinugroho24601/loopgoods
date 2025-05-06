@@ -38,7 +38,7 @@ class ItemResource extends Resource
             ->schema([
                 TextInput::make('name')->required(),
                 
-                Textarea::make('description'),
+                Textarea::make('description')->required(),
                 
                 Select::make('category_id')
                     ->relationship('category', 'name')
