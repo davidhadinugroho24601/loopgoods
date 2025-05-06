@@ -13,7 +13,10 @@ Route::get('/categories', [DisplayController::class, 'categories'])->name('categ
 Route::get('/categories/{id}', [DisplayController::class, 'categoryShow'])->name('category.show');
 
 
-Route::get('/dashboard',  [UserController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return redirect('/admin');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::get('/about-us', function () {
     return view('about');
