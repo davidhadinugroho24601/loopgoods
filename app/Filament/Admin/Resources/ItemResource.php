@@ -26,6 +26,7 @@ use Filament\Forms\Components\Hidden;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Filament\Facades\Filament;
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
@@ -44,10 +45,14 @@ class ItemResource extends Resource
                     ->relationship('category', 'name')
                     ->required(),
                 
+
                 Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Owner')
-                    ->required(),
+                    ->required()
+                    ->default(fn () => Filament::auth()->user()?->id)
+                    ->disabled(fn () => Filament::auth()->user()?->role !== 'admin'),
+
                 
                 TextInput::make('quantity')
                     ->type('number')
@@ -61,14 +66,27 @@ class ItemResource extends Resource
                     ->minValue(0)
                     ->visible(fn (string $context) => $context === 'edit')->disabled(),
                 
+                Textarea::make('address')->required(),
+        
+                LeafletMap::make('location')
+                    ->label('Location')
+                    ->columnSpanFull()
+                    ->extraAttributes(['class' => '!border-none !shadow-none !border-t-0'])
+                    ->required()
+                    ->dehydrated(false), // Don't store directly
 
-                    // LeafletMap::make('location')
-                    // ->label('Location')
-                    // ->columnSpanFull()
-                    // ->extraAttributes(['class' => '!border-none !shadow-none !border-t-0'])
-                    // ->required(), // Or any other rules,
-      
-                    
+                Hidden::make('latitude')
+                    ->dehydrateStateUsing(function (callable $get) {
+                        $location = json_decode($get('location'), true);
+                        
+                        return $location['lat'] ?? null;
+                    }),
+
+                Hidden::make('longitude')
+                    ->dehydrateStateUsing(function (callable $get) {
+                        $location = json_decode($get('location'), true);
+                        return $location['lng'] ?? null;
+                    }),
 
 
 

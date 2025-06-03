@@ -17,7 +17,7 @@ class Item extends Model
         'description',
         'latitude',
         'longitude',
-        'location',
+        'address',
         'image_path', 
         'quantity', 
         'stock', 
