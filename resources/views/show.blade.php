@@ -39,7 +39,7 @@
         <p class="text-lg font-semibold text-[#4EB57C] mb-4">Provider: {{ $item->user->name }}</p>
 
         <!-- Availability -->
-        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Location: {{ $item->location }}</p>
+        <p class="text-lg font-semibold text-[#4EB57C] mb-4">Address: {{ $item->address }}</p>
 
         <p class="text-lg font-semibold text-[#4EB57C] mb-4">Available Stock: {{ $item->stock }}</p>
 
@@ -123,7 +123,7 @@
         // Add a marker to the map
         L.marker([{{ $item->latitude }}, {{ $item->longitude }}])
             .addTo(map)
-            .bindPopup("<strong>{{ $item->name }}</strong><br>{{ $item->location }}")
+            .bindPopup("<strong>{{ $item->name }}</strong><br>{{ $item->address }}")
             .openPopup();
     });
 </script>
