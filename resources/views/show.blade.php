@@ -2,8 +2,20 @@
 
 @section('content')
 <div class="container mx-auto py-10">
+
     <!-- Item Detail Card -->
     <div class="bg-white text-black p-6 rounded-lg shadow-lg  transform transition max-w-2xl mx-auto">
+           <div x-show="open" x-transition 
+                 class="mt-4 space-y-4 bg-white p-4 border rounded-lg shadow">
+                 @if ($errors->any())
+                <div class="bg-red-100 text-red-700 p-3 rounded-lg mb-4">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
     <div class="relative w-full h-64 overflow-hidden rounded-md mb-4" x-data="{ current: 0 }">
     <div class="flex transition-all duration-500" :style="'transform: translateX(-' + (current * 100) + '%)'">
         @foreach ($item->gallery as $gallery)
@@ -79,8 +91,8 @@
                 Make a Request
             </a>
 
-            <div x-show="open" x-transition 
-                 class="mt-4 space-y-4 bg-white p-4 border rounded-lg shadow">
+         
+
                 <form action="{{ route('request.store') }}" method="POST" class="space-y-4">
                     @csrf
 
@@ -89,6 +101,7 @@
                     <input type="hidden" name="item_id" value="{{ $item->id }}">
 
                     <div>
+                        
                         <label class="block text-gray-700 mb-1">Quantity</label>
                         <input type="number" name="quantity" min="1" required 
                                class="w-full border rounded-lg p-2" placeholder="Enter quantity">

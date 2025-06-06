@@ -59,7 +59,13 @@ class ItemResource extends Resource
                     ->label('Quantity')
                     ->minValue(0)
                     ->required(),
-        
+
+                TextInput::make('max_request')
+                    ->type('number')
+                    ->label('Maximum Request')
+                    ->minValue(0)
+                    ,
+
                 TextInput::make('stock')
                     ->type('number')
                     ->label('Stock')
@@ -69,24 +75,21 @@ class ItemResource extends Resource
                 Textarea::make('address')->required(),
         
                 LeafletMap::make('location')
-                    ->label('Location')
-                    ->columnSpanFull()
-                    ->extraAttributes(['class' => '!border-none !shadow-none !border-t-0'])
-                    ->required()
-                    ->dehydrated(false), // Don't store directly
+                ->label('Location')
+                ->columnSpanFull()
+                ->extraAttributes(['class' => '!border-none !shadow-none !border-t-0'])
+                ->required(fn (string $context) => $context === 'create')
+                ->dehydrated(false),
+
 
                 Hidden::make('latitude')
-                    ->dehydrateStateUsing(function (callable $get) {
-                        $location = json_decode($get('location'), true);
-                        
-                        return $location['lat'] ?? null;
-                    }),
+                ->required(fn (string $context) => $context === 'create')
+                ->dehydrateStateUsing(fn (callable $get) => json_decode($get('location'), true)['lat'] ?? null),
 
                 Hidden::make('longitude')
-                    ->dehydrateStateUsing(function (callable $get) {
-                        $location = json_decode($get('location'), true);
-                        return $location['lng'] ?? null;
-                    }),
+                ->required(fn (string $context) => $context === 'create')
+                ->dehydrateStateUsing(fn (callable $get) => json_decode($get('location'), true)['lng'] ?? null),
+
 
 
 
@@ -118,6 +121,7 @@ class ItemResource extends Resource
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('category.name')->label('Category'),
                 TextColumn::make('quantity')->label('Quantity'),
+                TextColumn::make('max_request')->label('Maximum Request'),
                 TextColumn::make('stock')->label('Available Stock'),
                 // TextColumn::make('user.name')->label('Owner'),
                 // BadgeColumn::make('status')

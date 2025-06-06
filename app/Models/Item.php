@@ -19,6 +19,7 @@ class Item extends Model
         'longitude',
         'address',
         'image_path', 
+        'max_request', 
         'quantity', 
         'stock', 
     ];

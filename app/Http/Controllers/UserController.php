@@ -70,26 +70,47 @@ class UserController extends Controller
     
 
 
-    public function requestStore(Request $request)
-    {
-        $request->validate([
-            'sender_id' => 'required|exists:users,id',
-            'recipient_id' => 'required|exists:users,id',
-            'item_id' => 'required|exists:items,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
+        public function requestStore(Request $request)
+        {
+            $request->validate([
+                'sender_id' => 'required|exists:users,id',
+                'recipient_id' => 'required|exists:users,id',
+                'item_id' => 'required|exists:items,id',
+                'quantity' => 'required|integer|min:1',
+            ]);
 
-        // Create a new request
-        $requestModel = new ItemRequest();
-        $requestModel->sender_id = $request->sender_id;
-        $requestModel->recipient_id = $request->recipient_id;
-        $requestModel->item_id = $request->item_id;
-        $requestModel->quantity = $request->quantity;
-        $requestModel->status = 'sent'; // Default status (optional, adjust if you want)
-        $requestModel->save();
+            // Ambil item terkait
+            $item = Item::findOrFail($request->item_id);
 
-        return redirect()->back()->with('success', 'Request submitted successfully!');
-    }
+            // Cek apakah kuantitas melebihi stok atau melebihi batas permintaan
+            if ($item->stock < $request->quantity || $item->max_request < $request->quantity) {
+                $messages = [];
+
+                if ($item->stock < $request->quantity) {
+                    $messages[] = "Only {$item->stock} items available";
+                }
+
+                if ($item->max_request < $request->quantity) {
+                    $messages[] = "Maximum allowed per request is {$item->max_request}";
+                }
+
+                return redirect()->back()
+                    ->withErrors(['quantity' => implode('. ', $messages) . '.'])
+                    ->withInput();
+            }
+
+            // Buat permintaan item baru
+            $requestModel = new ItemRequest();
+            $requestModel->sender_id = $request->sender_id;
+            $requestModel->recipient_id = $request->recipient_id;
+            $requestModel->item_id = $request->item_id;
+            $requestModel->quantity = $request->quantity;
+            $requestModel->status = 'sent';
+            $requestModel->save();
+
+            return redirect()->back()->with('success', 'Request submitted successfully!');
+        }
+
 
 
     public function dashboard()

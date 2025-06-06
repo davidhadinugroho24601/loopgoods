@@ -16,16 +16,26 @@ class ItemService
     {
         $item = $request->item;
     
-        // Check if stock is enough
-        if ($item->stock < $request->quantity) {
+       if ($item->stock < $request->quantity) {
             Notification::make()
                 ->title('Insufficient Stock')
-                ->body("Only {$item->stock} available. Cannot accept the request.")
+                ->body("Only {$item->stock} items available. Cannot fulfill the request of {$request->quantity}.")
                 ->danger()
                 ->send();
-    
+
             return;
         }
+
+        if ($item->max_request < $request->quantity) {
+            Notification::make()
+                ->title('Request Limit Exceeded')
+                ->body("You can only request up to {$item->max_request} items.")
+                ->danger()
+                ->send();
+
+            return;
+        }
+
     
         // Update request status
         $request->update([
