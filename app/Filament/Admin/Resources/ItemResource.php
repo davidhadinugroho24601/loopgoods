@@ -83,11 +83,11 @@ class ItemResource extends Resource
 
 
                 Hidden::make('latitude')
-                ->required(fn (string $context) => $context === 'create')
+                // ->required(fn (string $context) => $context === 'create')
                 ->dehydrateStateUsing(fn (callable $get) => json_decode($get('location'), true)['lat'] ?? null),
 
                 Hidden::make('longitude')
-                ->required(fn (string $context) => $context === 'create')
+                // ->required(fn (string $context) => $context === 'create')
                 ->dehydrateStateUsing(fn (callable $get) => json_decode($get('location'), true)['lng'] ?? null),
 
 
