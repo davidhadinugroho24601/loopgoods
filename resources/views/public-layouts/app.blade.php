@@ -13,7 +13,10 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+        <link rel="stylesheet" href="https://new.loopgoods.org/build/assets/app-_LO1psbq.css">
+<script type="module" src="https://new.loopgoods.org/build/assets/app-CD7rGhhc.js"></script>
+
     </head>
 <body class="font-sans antialiased dark:bg-[#EAF8EF] ">
 
