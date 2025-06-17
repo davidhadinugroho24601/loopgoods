@@ -3,11 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Product Display</title>
+        <title>LoopGoods</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
         <!-- leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -22,7 +23,7 @@
 
     <!-- Main Content Section -->
     <div class="bg-gray-50 text-black/50 dark:bg-[#EAF8EF]">
-        <div class="container mx-auto px-4 py-6">
+        <div class="container mx-auto px-4 py-6 pb-24">
             @yield('content')
         </div>
     </div>
