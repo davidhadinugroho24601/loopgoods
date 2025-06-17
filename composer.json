@@ -8,19 +8,23 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "filament/filament": "^3.3",
+        "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "pusher/pusher-php-server": "^7.2",
         "twbs/bootstrap": "^5.3"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^1.0",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^11.0.1"
+        "phpunit/phpunit": "^11.0.1",
+        "rector/rector": "^1.0",
+        "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
         "psr-4": {
@@ -50,6 +54,15 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "setup": [
+            "composer install",
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php artisan key:generate",
+            "php artisan config:cache",
+            "php artisan migrate",
+            "npm install",
+            "npm run build"
         ]
     },
     "extra": {
