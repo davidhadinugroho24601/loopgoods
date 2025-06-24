@@ -27,6 +27,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
 use Filament\Facades\Filament;
+use Carbon\Carbon;
+
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
@@ -47,18 +49,21 @@ class ItemResource extends Resource
                 
 
                 Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label('Owner')
-                    ->required()
-                    ->default(fn () => Filament::auth()->user()?->id)
-                    ->disabled(fn () => Filament::auth()->user()?->role !== 'admin'),
+                ->relationship('user', 'name')
+                ->label('Owner')
+                ->required()
+                ->default(fn () => Filament::auth()->user()?->id)
+                ->disabled(fn () => Filament::auth()->user()?->role !== 'admin')
+                ->dehydrated(true), // <-- this forces it to be saved
 
                 
                 TextInput::make('quantity')
-                    ->type('number')
-                    ->label('Quantity')
-                    ->minValue(0)
-                    ->required(),
+                ->type('number')
+                ->label('Quantity')
+                ->minValue(1)
+                ->default(1)
+                ->required(),
+
 
                 TextInput::make('max_request')
                     ->type('number')
@@ -129,7 +134,14 @@ class ItemResource extends Resource
                 //         'success' => 'available',
                 //         'danger' => 'taken',
                 //     ]),
-                TextColumn::make('created_at')->dateTime()->sortable(),
+
+            TextColumn::make('created_at')
+                ->label('Created At')
+                ->formatStateUsing(fn ($state) => Carbon::parse($state)
+                    ->timezone('Asia/Jakarta')
+                    ->translatedFormat('d F Y H:i') . ' WIB')
+                ->sortable(),
+
             ])
             ->filters([
                 // SelectFilter::make('status')

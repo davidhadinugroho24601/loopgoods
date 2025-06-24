@@ -35,5 +35,10 @@ class EditItem extends EditRecord
         return $data;
     }
 
-   
+protected function afterSave(): void
+{
+    $this->redirect(request()->header('Referer') ?? '/'); 
+}
+
+
 }

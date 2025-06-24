@@ -4,6 +4,9 @@
     #map {
         height: 400px;
         width: 100%;
+         position: relative; /* or 'absolute' depending on layout */
+        z-index: 0; /* Ensures it stays behind elements with z-index > 0 */
+
     }
 </style>
 
