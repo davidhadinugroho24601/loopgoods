@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- Remember Me -->
-                <div class="flex items-center justify-between mb-4">
+                <!-- <div class="flex items-center justify-between mb-4">
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox" class="form-checkbox rounded text-green-600" name="remember">
                         <span class="ml-2 text-gray-600">Remember for 30 days</span>
@@ -67,7 +67,7 @@
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="text-green-500 text-sm hover:underline">Forgot password?</a>
                     @endif
-                </div>
+                </div> -->
 
                 <!-- Submit Button -->
                 <button type="submit" class="w-full !bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">
