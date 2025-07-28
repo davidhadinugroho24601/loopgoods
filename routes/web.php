@@ -49,6 +49,22 @@ Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('items/{id}', [DisplayController::class, 'show'])->name('item.show');
 });
 
+Route::get('/admin/requests/export/csv', function () {
+    $data = \App\Models\Request::query()
+        ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('year', 'month')
+        ->orderBy('year')->orderBy('month')->get();
+
+    $csv = "Month,Request Count\n";
+    foreach ($data as $item) {
+        $csv .= Carbon\Carbon::createFromDate($item->year, $item->month)->format('M Y') . "," . $item->count . "\n";
+    }
+
+    return Response::make($csv, 200, [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="total-requests.csv"',
+    ]);
+})->name('requests.export.csv')->middleware(['auth', 'admin']);
 
 
 
