@@ -9,8 +9,8 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [DisplayController::class, 'index'])->name('home');
 
-Route::get('/categories', [DisplayController::class, 'categories'])->name('categories');
-Route::get('/categories/{id}', [DisplayController::class, 'categoryShow'])->name('category.show');
+Route::get('/all-items', [DisplayController::class, 'categories'])->name('categories');
+Route::get('/all-items/{id}', [DisplayController::class, 'categoryShow'])->name('category.show');
 
 
 Route::get('/dashboard', function () {

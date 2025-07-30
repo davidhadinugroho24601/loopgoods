@@ -8,36 +8,50 @@ use App\Models\Category;
 
 class DisplayController extends Controller
 {
-    public function index()
-    {
-        $categories = Category::all();
-        $items = Item::where('stock', '>', 0)
-            ->whereHas('gallery') // hanya item yang punya galeri
-            ->get();
+    
 
-        return view('welcome', compact('items', 'categories'));
+public function index()
+{
+    $categories = Category::all();
+    $items = Item::where('stock', '>', 0)
+        ->whereHas('gallery')
+        ->orderBy('created_at', 'desc') // urutkan berdasarkan terbaru
+        ->get();
+
+    return view('welcome', compact('items', 'categories'));
+}
+
+
+public function categories(Request $request)
+{
+    $categories = Category::all();
+
+    $query = Item::where('stock', '>', 0)
+        ->whereHas('gallery')
+        ->orderBy('created_at', 'desc'); // urutkan berdasarkan terbaru
+
+    if ($request->filled('search')) {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
 
-    public function categories()
-    {
-        $categories = Category::all();
-        $items = Item::where('stock', '>', 0)
-            ->whereHas('gallery') // hanya item yang punya galeri
-            ->get();
+    $items = $query->paginate(12); 
 
-        return view('categories', compact('items', 'categories'));
-    }
+    return view('categories', compact('items', 'categories'));
+}
 
-    public function categoryShow($categoryId)
-    {
-        $categories = Category::all();
-        $items = Item::where('category_id', $categoryId)
-            ->where('stock', '>', 0)
-            ->whereHas('gallery') // hanya item yang punya galeri
-            ->get();
 
-        return view('categories', compact('items', 'categories'));
-    }
+public function categoryShow($categoryId)
+{
+    $categories = Category::all();
+    $items = Item::where('category_id', $categoryId)
+        ->where('stock', '>', 0)
+        ->whereHas('gallery')
+        ->orderBy('created_at', 'desc') // urutkan berdasarkan terbaru
+        ->paginate(12);
+
+    return view('categories', compact('items', 'categories'));
+}
+
 
     public function show($id)
     {

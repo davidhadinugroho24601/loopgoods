@@ -30,7 +30,7 @@ class RequestTableWidget extends BaseWidget
     {
         return [
             TextColumn::make('sender.name')->label('Sender'),
-            TextColumn::make('recipient.name')->label('Recipient'),
+            TextColumn::make('recipient.name')->label('Recipient')->sortable(),
             TextColumn::make('item.name')->label('Item'),
             TextColumn::make('quantity'),
 

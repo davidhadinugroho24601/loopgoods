@@ -24,7 +24,7 @@
         <h5 class="text-lg font-bold mb-3">Navigasi</h5>
         <ul class="space-y-2">
           <li><a href="/" class="hover:underline">Home</a></li>
-          <li><a href="/categories" class="hover:underline">Category</a></li>
+          <li><a href="{{ route('categories') }}" class="hover:underline">Category</a></li>
           <li><a href="/about" class="hover:underline">About Us</a></li>
           <li><a href="/contact" class="hover:underline">Contact</a></li>
         </ul>

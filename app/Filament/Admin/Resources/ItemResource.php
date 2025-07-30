@@ -124,7 +124,7 @@ class ItemResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->searchable(),
-                TextColumn::make('category.name')->label('Category'),
+                TextColumn::make('category.name')->label('Category')->sortable(),
                 TextColumn::make('quantity')->label('Quantity'),
                 TextColumn::make('max_request')->label('Maximum Request'),
                 TextColumn::make('stock')->label('Available Stock'),
