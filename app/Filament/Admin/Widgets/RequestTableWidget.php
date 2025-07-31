@@ -29,9 +29,9 @@ class RequestTableWidget extends BaseWidget
     protected function getTableColumns(): array
     {
         return [
-            TextColumn::make('sender.name')->label('Sender'),
+            TextColumn::make('sender.name')->label('Sender')->sortable(),
             TextColumn::make('recipient.name')->label('Recipient')->sortable(),
-            TextColumn::make('item.name')->label('Item'),
+            TextColumn::make('item.name')->label('Item')->sortable(),
             TextColumn::make('quantity'),
 
             IconColumn::make('status')

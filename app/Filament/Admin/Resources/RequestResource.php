@@ -67,9 +67,9 @@ class RequestResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('sender.name'),
-                TextColumn::make('recipient.name'),
-                TextColumn::make('item.name'),
+                TextColumn::make('sender.name')->sortable(),
+                TextColumn::make('recipient.name')->sortable(),
+                TextColumn::make('item.name')->sortable(),
                 TextColumn::make('quantity'),
 
                 IconColumn::make('status')

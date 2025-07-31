@@ -55,8 +55,8 @@ public static function canCreate(): bool
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
+                TextColumn::make('name')->sortable(),
+                TextColumn::make('email')->sortable(),
 
             ])
             ->filters([

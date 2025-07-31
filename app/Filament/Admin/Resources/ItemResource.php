@@ -123,7 +123,7 @@ class ItemResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable(),
+                TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('category.name')->label('Category')->sortable(),
                 TextColumn::make('quantity')->label('Quantity'),
                 TextColumn::make('max_request')->label('Maximum Request'),
