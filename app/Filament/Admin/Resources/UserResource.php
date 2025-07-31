@@ -7,6 +7,7 @@ use App\Filament\Admin\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Password;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -37,6 +38,7 @@ public static function canCreate(): bool
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('email')->required()->email(),
+                Select::make('role'),
                 TextInput::make('password')
                 ->password()
                 ->required(fn ($component) => is_null($component->getRecord()))->revealable(), // Only required when creating
