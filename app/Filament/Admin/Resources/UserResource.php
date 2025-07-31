@@ -38,7 +38,12 @@ public static function canCreate(): bool
             ->schema([
                 TextInput::make('name')->required(),
                 TextInput::make('email')->required()->email(),
-                Select::make('role'),
+                Select::make('role')
+                    ->options([
+        'admin' => 'Admin',
+        'user' => 'User',
+       
+         ]),
                 TextInput::make('password')
                 ->password()
                 ->required(fn ($component) => is_null($component->getRecord()))->revealable(), // Only required when creating
