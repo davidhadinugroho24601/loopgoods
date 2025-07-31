@@ -19,7 +19,7 @@ class ChatResource extends Resource
 {
     protected static ?string $model = Chat::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
     public static function canCreate(): bool
     {
         return false;

@@ -25,7 +25,7 @@ class RequestResource extends Resource
 {
     protected static ?string $model = Request::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-arrow-down';
     public static function canCreate(): bool
     {
         return false;

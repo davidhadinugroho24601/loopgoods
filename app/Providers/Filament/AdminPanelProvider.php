@@ -21,6 +21,13 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Admin\Widgets\TotalRequestsChart;
 use App\Filament\Admin\Widgets\StatsOverviewWidget;
 use App\Filament\Admin\Widgets\RequestTableWidget;
+use App\Filament\Admin\Resources\CategoryResource;
+use App\Filament\Admin\Resources\ChatResource;
+use App\Filament\Admin\Resources\ItemResource;
+use App\Filament\Admin\Resources\RequestResource;
+use App\Filament\Admin\Resources\UserResource;
+use Filament\Navigation\NavigationItem;
+use Filament\Pages\Dashboard;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -67,6 +74,43 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+           ->navigationItems([
+        NavigationItem::make('dashboard')
+            ->label(fn (): string => __('filament-panels::pages/dashboard.title'))
+            ->url(fn (): string => Dashboard::getUrl())
+            ->isActiveWhen(fn () => request()->routeIs('filament.admin.pages.dashboard'))
+            ->icon('heroicon-o-home')
+            ,
+
+        NavigationItem::make('Categories')
+            ->url('/admin/categories')
+            ->icon('heroicon-o-tag')
+            ->visible(fn () => auth()->user()?->isAdmin()),
+
+        NavigationItem::make('Items')
+            ->url('/admin/items')
+            ->icon('heroicon-o-archive-box')
+            ,
+
+        NavigationItem::make('Chats')
+            ->url('/admin/chats')
+            ->icon('heroicon-o-chat-bubble-left-right')
+            ,
+
+        NavigationItem::make('Requests')
+            ->url('/admin/requests')
+            ->icon('heroicon-o-inbox-arrow-down')
+            ,
+
+        NavigationItem::make('Users')
+            ->url('/admin/users')
+            ->icon('heroicon-o-users')
+            ->visible(fn () => auth()->user()?->isAdmin()),
+    ])
+
+
               ;
     }
+
+   
 }

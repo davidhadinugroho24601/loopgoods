@@ -15,31 +15,53 @@ class TotalRequestsChart extends ChartWidget
         return 'full';
     }
 
-    protected function getData(): array
-    {
-        $requests = Request::query()
-            ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
-            ->groupBy('year', 'month')
-            ->orderBy('year')
-            ->orderBy('month')
-            ->get();
+   protected function getData(): array
+{
+    $query = Request::query();
 
-        $labels = $requests->map(function ($item) {
-            return Carbon::createFromDate($item->year, $item->month, 1)->format('M Y');
-        })->toArray();
+    // Apply recipient filter if not admin
+    if (auth()->user()?->role !== 'admin') {
+        $query->where('recipient_id', auth()->id());
+    }
 
-        $data = $requests->pluck('count')->toArray();
+    $requests = $query
+        ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('year', 'month')
+        ->orderBy('year')
+        ->orderBy('month')
+        ->get();
 
-        return [
-            'datasets' => [
-                [
-                    'label' => 'Requests',
-                    'data' => $data,
+    $labels = $requests->map(function ($item) {
+        return Carbon::createFromDate($item->year, $item->month, 1)->format('M Y');
+    })->toArray();
+
+    $data = $requests->pluck('count')->toArray();
+
+    return [
+        'datasets' => [
+            [
+                'label' => 'Requests',
+                'data' => $data,
+            ],
+        ],
+        'labels' => $labels,
+    ];
+}
+
+protected function getOptions(): array
+{
+    return [
+        'scales' => [
+            'y' => [
+                'ticks' => [
+                    'precision' => 0, // Remove decimal points
+                    'stepSize' => 1,  // Optional: force step by 1
+                    'beginAtZero' => true,
                 ],
             ],
-            'labels' => $labels,
-        ];
-    }
+        ],
+    ];
+}
 
     protected function getType(): string
     {
