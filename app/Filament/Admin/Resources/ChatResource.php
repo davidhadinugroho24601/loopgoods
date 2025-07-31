@@ -60,9 +60,13 @@ class ChatResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+       ->actions([
+        Tables\Actions\EditAction::make()
+            ->icon('heroicon-o-eye')
+            ->label('View')
+            ->color('secondary'), 
+        ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

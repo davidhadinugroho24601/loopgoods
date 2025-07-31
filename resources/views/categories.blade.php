@@ -31,7 +31,7 @@
 <!-- Product Display Section -->
 <section class="py-16 bg-gray-100">
     <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6 text-[#4EB57C]">Nearest Items from Your Location</h2>
+        <h2 class="text-3xl font-bold mb-6 text-[#4EB57C]">All Items</h2>
 
         <!-- Search Bar -->
         <form method="GET" action="{{ route('categories') }}" class="mb-8 flex justify-center">

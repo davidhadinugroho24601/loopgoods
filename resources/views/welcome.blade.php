@@ -84,7 +84,7 @@
 <!-- Product Display Section -->
 <section class="py-16 bg-gray-100">
     <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-6 text-[#4EB57C]">Nearest Items from Your Location</h2>
+        <h2 class="text-3xl font-bold mb-6 text-[#4EB57C]">Newest Items</h2>
 
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             @foreach ($items->take(4) as $item)
